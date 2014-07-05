@@ -58,12 +58,12 @@ FPM_ARGS += --before-install $(PREINSTALL)
 endif
 
 ifdef PREUNINSTALL
-FPM_ARGS += --before-uninstall $(PREUNINSTALL)
+FPM_ARGS += --before-remove $(PREUNINSTALL)
 endif
 
 ifeq ($(FPM_SOURCE),dir)
 FPM_CMD := fpm -t deb -s $(FPM_SOURCE) $(FPM_ARGS) -n $(NAME) \
-	-C $(DESTDIR) .
+	-C $(DESTDIR) --deb-user root --deb-group root .
 else
 FPM_CMD := fpm -t deb -s $(FPM_SOURCE) $(FPM_ARGS) $(NAME)
 endif
